@@ -11,6 +11,8 @@ var app = express();
 
 //Cargar Ficheros Rutas
 
+var articleRoutes = require('./routes/article');
+
 //Middlewares
 
 app.use(express.urlencoded({ extended: false }));
@@ -19,18 +21,9 @@ app.use(express.json());
 
 //Cors
 
-//Anadir prefijos a rutas
+//Anadir prefijos a rutas / cargar rutas
 
-//Prueba
-
-app.get('/probando', ( req, res ) => {
-    return res.status(200).send(
-        {
-            course: "master en Frameworks",
-            autor: "Jeiner Arenales"
-        }
-    )
-})
+app.use( '/api', articleRoutes );
 
 //Exportar modulo
 
