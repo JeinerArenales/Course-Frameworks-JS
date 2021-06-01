@@ -1,6 +1,8 @@
 "use strict";
 
 var validator = require('validator');
+var fs = require('fs');
+var path = require('path');
 var Article = require('../models/article');
 
 var contoller = {
@@ -172,6 +174,44 @@ var contoller = {
                 article: articleRemove,
             })
         });
+    },
+    uploadArticle: (req, res) => {
+        var fileName = 'Imagen no subida';
+        if (!req.files) {
+            return res.status(404).send({
+                status: "error",
+                message: fileName,
+            });
+        }
+        var filePath = req.files.file0.path;
+        var fileSplit = filePath.split('\\');
+        var file_Name = fileSplit[2];
+        var extensionSplit = file_Name.split('\.');
+        var fileExt = extensionSplit[1];
+        if (fileExt != 'png' && fileExt != 'jpg' && fileExt != 'jpeg' && fileExt != 'gif') {
+            fs.unlink(filePath, (err) => {
+                return res.status(200).send({
+                    status: "error",
+                    message: "Error del servidor",
+                })
+            });
+        } else {
+            var id = req.params.id;
+            Article.findOneAndUpdate({ _id: id }, { image: file_Name }, { new: true }, (err, articleUpdated) => {
+
+                if (err || !articleUpdated) {
+                    return res.status(500).send({
+                        status: "error",
+                        message: "error del servidor",
+                    })
+                }
+
+                return res.status(200).send({
+                    status: "success",
+                    article: articleUpdated,
+                })
+            })
+        }
     }
 };
 
