@@ -14,5 +14,9 @@ router.post("/datos-curso", ArticleController.datosCurso);
 
 router.post("/save", ArticleController.save);
 router.get("/articles", ArticleController.getArticles);
+router.get("/articles/:last?", ArticleController.getArticles);
+router.get("/article/:id", ArticleController.getArticleById);
+router.put("/article/:id", ArticleController.updateArticle);
+router.delete("/article/:id", ArticleController.deleteArticle);
 
 module.exports = router;

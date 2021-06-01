@@ -51,8 +51,12 @@ var contoller = {
         }
     },
     getArticles: (req, res) => {
-
-        Article.find({}).sort('-_id').exec((err, articles) => {
+        var query = Article.find({});
+        var last = req.params.last;
+        if (last || last != undefined) {
+            query.limit(5);
+        }
+        query.sort('-_id').exec((err, articles) => {
             if (err) {
                 return res.status(500).send({
                     status: "error",
@@ -70,6 +74,104 @@ var contoller = {
                 articles,
             });
         })
+    },
+    getArticleById: (req, res) => {
+        var id = req.params.id;
+        if (!id) {
+            return res.status(404).send({
+                status: "error",
+                message: "id no encontrado",
+            });
+        }
+        Article.findById(id, (err, article) => {
+            if (err) {
+                return res.status(500).send({
+                    status: "error",
+                    message: "Error Servidor",
+                });
+            }
+            if (!article) {
+                return res.status(404).send({
+                    status: "error",
+                    message: "No existe el articulo",
+                });
+            }
+            return res.status(200).send({
+                status: "success",
+                article,
+            });
+        })
+    },
+    updateArticle: (req, res) => {
+        var id = req.params.id;
+        if (!id) {
+            return res.status(404).send({
+                status: "error",
+                message: "id no encontrado",
+            });
+        }
+        var params = req.body;
+        try {
+            var validateTitle = !validator.isEmpty(params.title);
+            var validateContent = !validator.isEmpty(params.content);
+        } catch (err) {
+            return res.status(200).send({
+                status: "error",
+                message: "Faltan datos por enviar",
+            })
+        }
+        if (validateTitle && validateContent) {
+            Article.findOneAndUpdate({ _id: id }, params, { new: true }, (err, articleUpdated) => {
+                if (err) {
+                    return res.status(500).send({
+                        status: "error",
+                        message: "Error al actualizar",
+                    })
+                }
+                if (!articleUpdated) {
+                    return res.status(404).send({
+                        status: "error",
+                        message: "No existe article",
+                    })
+                }
+                return res.status(200).send({
+                    status: "Success",
+                    article: articleUpdated,
+                })
+            });
+        } else {
+            return res.status(200).send({
+                status: "error",
+                message: "Validacion incorrecta",
+            })
+        }
+    },
+    deleteArticle: (req, res) => {
+        var id = req.params.id;
+        if (!id) {
+            return res.status(404).send({
+                status: "error",
+                message: "id no encontrado",
+            });
+        }
+        Article.findOneAndDelete({ _id: id }, (err, articleRemove) => {
+            if (err) {
+                return res.status(500).send({
+                    status: "error",
+                    message: "Error al Eliminar",
+                })
+            }
+            if (!articleRemove) {
+                return res.status(404).send({
+                    status: "error",
+                    message: "No existe article",
+                })
+            }
+            return res.status(200).send({
+                status: "Success",
+                article: articleRemove,
+            })
+        });
     }
 };
 
