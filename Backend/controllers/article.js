@@ -4,6 +4,7 @@ var validator = require('validator');
 var fs = require('fs');
 var path = require('path');
 var Article = require('../models/article');
+const { exists } = require('../models/article');
 
 var contoller = {
     datosCurso: (req, res) => {
@@ -212,6 +213,55 @@ var contoller = {
                 })
             })
         }
+    },
+    getImage: (req, res) => {
+        var file = req.params.image;
+        var pathFile = `./upload/articles/${file}`;
+        fs.exists(pathFile, (exist) => {
+            if (exist) {
+                return res.sendFile(path.resolve(pathFile))
+            } else {
+                return res.status(404).send({
+                    status: "error",
+                    message: "La imagen no existe",
+                })
+            }
+        })
+    },
+    searchArticle: (req, res) => {
+        var searchString = req.params.search;
+        Article.find({
+            "$or": [
+                {
+                    "title": {
+                        "$regex": searchString, "$options": "i"
+                    }
+                },
+                {
+                    "content": {
+                        "$regex": searchString, "$options": "i"
+                    }
+                },
+            ]
+        }).sort([['date', 'descending']])
+        .exec((err, articles) => {
+            if (err) {
+                return res.status(404).send({
+                    status: "error",
+                    message: "Error de Servidor",
+                })
+            }
+            if (!articles || articles.length <= 0) {
+                return res.status(404).send({
+                    status: "error",
+                    message: "Articulos no enconttrados",
+                })
+            }
+            return res.status(404).send({
+                status: "success",
+                articles
+            })
+        })
     }
 };
 
