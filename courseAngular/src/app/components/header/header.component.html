@@ -12,19 +12,19 @@
         <nav id="menu">
             <ul>
                 <li>
-                    <a href="index.html">Inicio</a>
+                    <a [routerLink]="['/home']" [routerLinkActive]="['active']">Inicio</a>
                 </li>
                 <li>
-                    <a href="blog.html">Blog</a>
+                    <a [routerLink]="['/blog']" [routerLinkActive]="['active']">Blog</a>
                 </li>
                 <li>
-                    <a href="formulario.html">Formulario</a>
+                    <a [routerLink]="['/forms']" [routerLinkActive]="['active']">Forms</a>
                 </li>
                 <li>
-                    <a href="#">Pagina 1</a>
+                    <a [routerLink]="['/movies']" [routerLinkActive]="['active']">Movies</a>
                 </li>
                 <li>
-                    <a href="#">Pagina 2</a>
+                    <a [routerLink]="['/random']" [routerLinkActive]="['active']">Page</a>
                 </li>                            
             </ul>
         </nav>
