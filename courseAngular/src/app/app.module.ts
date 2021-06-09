@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }   from '@angular/forms';
 
 import { routing, appRoutingProviders } from './app.routing';
 
@@ -33,7 +34,8 @@ import { MovieComponent } from './components/movie/movie.component';
   ],
   imports: [
     BrowserModule,
-    routing
+    routing,
+    FormsModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

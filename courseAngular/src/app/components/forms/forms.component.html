@@ -1,7 +1,34 @@
 <app-slider [name]="'Forms'" [size]="'small'"></app-slider>
 <div class="center">
     <section id="content">
-        <h1 class="subheader">Forms</h1>
+        <h1 class="subheaders">Forms</h1>
+        <form class="mid-form" #userForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" #name="ngModel" [(ngModel)]="user.name" />
+            </div>
+
+            <div class="form-group">
+                <label for="apellidos">Apellidos</label>
+                <input type="text" name="apellidos" />
+            </div>
+
+            <div class="form-group">
+                <label for="bio">Biografia</label>
+                <textarea name="bio"></textarea>
+            </div>
+
+            <div class="form-group radibuttons">
+                <input type="radio" name="genero" value="hombre" /> Hombre
+                <input type="radio" name="genero" value="mujer" /> Mujer
+                <input type="radio" name="genero" value="otro" /> Otro
+            </div>
+
+            <div class="clearfix"></div>
+
+            <input type="submit" value="Enviar" class="btn btn-success" />
+
+        </form>
     </section>
     <app-sidebar></app-sidebar>
 </div>
