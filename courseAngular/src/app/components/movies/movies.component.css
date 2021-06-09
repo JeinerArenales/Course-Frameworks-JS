@@ -1,0 +1,17 @@
+.year-gray{
+    display: block;
+    background: grey;
+    color: #fafafa;
+    padding: 5px;
+    width: 121px;
+    text-align: center;
+}
+
+.year-blue{
+    display: block;
+    background: mediumseagreen;
+    color: #fafafa;
+    padding: 5px;
+    width: 121px;
+    text-align: center;
+}
