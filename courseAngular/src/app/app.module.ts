@@ -14,6 +14,7 @@ import { FormsComponent } from './components/forms/forms.component';
 import { RandomComponent } from './components/random/random.component';
 import { MoviesComponent } from './components/movies/movies.component';
 import { ErrorComponent } from './components/error/error.component';
+import { MovieComponent } from './components/movie/movie.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ErrorComponent } from './components/error/error.component';
     FormsComponent,
     RandomComponent,
     MoviesComponent,
-    ErrorComponent
+    ErrorComponent,
+    MovieComponent
   ],
   imports: [
     BrowserModule,

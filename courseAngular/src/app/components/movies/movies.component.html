@@ -4,25 +4,9 @@
         <h1 class="subheader">Movies</h1>
         <h2>List of Movies</h2>
         <div id="articles">
-            <article class="article-item" *ngFor="let m of movies;let i = index">
-                <div class="image-wrap">
-                    <img src="{{m.image}}" alt="{{m.title}}" />
-                </div>
-
-                <h2>{{m.title}}</h2>
-                <span class="date">
-                    Hace 5 minutos
-                </span>
-                <span class="year" [ngClass]="{'year-gray': m.year > 2019, 'year-blue': m.year <= 2019}">
-                    {{m.year}}
-                </span>
-                <a href="#">Leer más</a>
-
-                <div class="clearfix"></div>
-            </article>
-
-            <!--AÑADIR ARTICULOS VIA JS-->
-
+            <div *ngFor="let m of movies;let i = index">
+                <app-movie [movie]="m"></app-movie>
+            </div>
         </div>
     </section>
     <app-sidebar></app-sidebar>
