@@ -9,6 +9,7 @@ import { Movie } from '../../models/movie';
 export class MoviesComponent implements OnInit {
 
   movies: Array<Movie> = [];
+  favorite: Movie = new Movie(0,'','');
 
   constructor() {
     this.movies = [
@@ -19,6 +20,10 @@ export class MoviesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  viewFavorite(event: any){
+    this.favorite = event.movie;
   }
 
 }

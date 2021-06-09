@@ -1,11 +1,16 @@
 <app-slider [name]="'Movies'" [size]="'small'"></app-slider>
 <div class="center">
     <section id="content">
+        <div id="favorite" *ngIf="favorite.title != '' ">
+            <h2 class="subheader"> Favorite Movie </h2>
+            <h4>{{favorite.title | uppercase}}</h4>
+            <h4>{{favorite.year}}</h4>
+        </div>
         <h1 class="subheader">Movies</h1>
         <h2>List of Movies</h2>
         <div id="articles">
             <div *ngFor="let m of movies;let i = index">
-                <app-movie [movie]="m"></app-movie>
+                <app-movie [movie]="m" (favoriteMovie)="viewFavorite($event)"></app-movie>
             </div>
         </div>
     </section>

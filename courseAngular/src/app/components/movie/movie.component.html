@@ -11,6 +11,9 @@
         {{movie.year}}
     </span>
     <a href="#">Leer más</a>
+    <button (click)="select($event, movie)">
+        Seleccionar como Favorito
+    </button>
 
     <div class="clearfix"></div>
 </article>
