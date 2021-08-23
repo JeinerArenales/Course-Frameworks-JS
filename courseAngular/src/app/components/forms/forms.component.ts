@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormsComponent implements OnInit {
 
-  user: any = {};
+  public campo: string = '';
+  public user: any = {};
 
   constructor() { 
     this.user = {
@@ -23,6 +24,10 @@ export class FormsComponent implements OnInit {
 
   onSubmit(){
     console.log(this.user)
+  }
+
+  onClick(){
+    console.log("Has dado click!")
   }
 
 }
