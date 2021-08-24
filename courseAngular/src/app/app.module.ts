@@ -17,6 +17,7 @@ import { RandomComponent } from './components/random/random.component';
 import { MoviesComponent } from './components/movies/movies.component';
 import { ErrorComponent } from './components/error/error.component';
 import { MovieComponent } from './components/movie/movie.component';
+import { ArticlesComponent } from './components/articles/articles.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MovieComponent } from './components/movie/movie.component';
     RandomComponent,
     MoviesComponent,
     ErrorComponent,
-    MovieComponent
+    MovieComponent,
+    ArticlesComponent
   ],
   imports: [
     BrowserModule,
